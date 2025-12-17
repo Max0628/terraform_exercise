@@ -29,3 +29,15 @@ id_rsa.pub
 # OS
 .DS_Store
 Thumbs.db
+
+# Exercises specific
+exercises/**/lambda/*.zip
+exercises/**/lambda/node_modules/
+exercises/**/test-output/
+exercises/**/website/dist/
+exercises/**/website/node_modules/
+exercises/**/.terraform/
+exercises/**/.terragrunt-cache/
+exercises/**/terraform.tfstate*
+exercises/**/.terraform.lock.hcl
+Thumbs.db

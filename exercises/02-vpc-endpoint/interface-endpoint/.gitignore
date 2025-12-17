@@ -1,0 +1,7 @@
+# Terraform
+.terraform/
+terraform.tfstate*
+.terraform.lock.hcl
+
+# 測試輸出
+test-output/

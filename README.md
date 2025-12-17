@@ -1,4 +1,25 @@
-# Terraform AWS VPC 實作專案
+# Terraform AWS 基礎架構實作專案
+
+## 📁 專案結構
+
+### 🏗️ 基礎架構
+- **Multi-environment setup** with Terragrunt
+  - `environments/dev/` - 開發環境
+  - `environments/prod/` - 生產環境
+- **Reusable modules**
+  - `compute/` - EC2 運算資源模組
+  - `network/` - VPC 網路架構模組
+- **Remote State Backend**
+  - `backend-setup/` - S3 + DynamoDB 狀態管理
+
+### 🎓 練習作業（Learning & Practice）
+- `exercises/01-s3-lambda-discord/` - Event-driven S3 上傳通知
+- `exercises/02-vpc-endpoint/` - VPC Endpoint（Gateway & Interface）
+- `exercises/03-cloudfront-s3-static/` - CloudFront CDN + 靜態網站
+
+詳細說明請參考 [exercises/README.md](exercises/README.md)
+
+---
 
 ## 專案說明
 本專案使用 Terraform 在 AWS 東京 region 建立完整的 VPC 架構，包含：
@@ -122,20 +143,6 @@ curl google.com
 ```bash
 terraform destroy
 # 輸入 yes 確認
-```
-
-## 常見問題
-
-### Q: terraform init 失敗
-A: 請確認 AWS credentials 已設定正確，執行 `aws sts get-caller-identity` 測試。
-
-### Q: SSH 連線被拒絕
-A: 請確認 Security Group 的 `my_ip` 設定正確，且 EC2 已完全啟動。
-
-### Q: nginx 無法存取
-A: 請稍等 1-2 分鐘，EC2 的 user_data script 需要時間執行。可 SSH 進去檢查：
-```bash
-sudo systemctl status nginx
 ```
 
 ## 費用預估
