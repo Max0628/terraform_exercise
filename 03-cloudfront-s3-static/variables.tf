@@ -16,16 +16,18 @@ variable "aws_profile" {
   default     = "dev"
 }
 
-variable "enable_custom_domain" {
-  description = "是否啟用自訂網域（需要 Route 53 和 ACM）"
-  type        = bool
-  default     = false
-}
-
 variable "custom_domain" {
-  description = "自訂網域名稱（如果 enable_custom_domain = true）"
+  description = "自訂網域名稱（留空則使用 CloudFront 預設網域，建議配置）"
   type        = string
   default     = ""
+  
+  validation {
+    condition = (
+      var.custom_domain == "" || 
+      can(regex("^[a-z0-9.-]+\\.[a-z]{2,}$", var.custom_domain))
+    )
+    error_message = "網域格式不正確（範例：www.example.com）"
+  }
 }
 
 variable "bucket_name" {

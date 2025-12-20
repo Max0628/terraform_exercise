@@ -136,18 +136,20 @@ resource "aws_cloudfront_distribution" "website" {
   # 學習重點：
   # - CloudFront 預設憑證（*.cloudfront.net）
   # - 如果要自訂網域，需要用 ACM 憑證（必須在 us-east-1）
+  # - 根據 custom_domain 變數自動切換
   ########
   viewer_certificate {
-    cloudfront_default_certificate = !var.enable_custom_domain
+    # 未配置自訂網域時使用 CloudFront 預設憑證
+    cloudfront_default_certificate = !local.enable_custom_domain
     
-    # 如果啟用自訂網域（需要先建立 ACM 憑證）
-    # acm_certificate_arn      = var.enable_custom_domain ? aws_acm_certificate.cloudfront[0].arn : null
-    # ssl_support_method       = var.enable_custom_domain ? "sni-only" : null
-    # minimum_protocol_version = var.enable_custom_domain ? "TLSv1.2_2021" : null
+    # 配置自訂網域時使用 ACM 憑證
+    acm_certificate_arn      = local.enable_custom_domain ? aws_acm_certificate_validation.cloudfront[0].certificate_arn : null
+    ssl_support_method       = local.enable_custom_domain ? "sni-only" : null
+    minimum_protocol_version = local.enable_custom_domain ? "TLSv1.2_2021" : null
   }
   
-  # 如果啟用自訂網域
-  # aliases = var.enable_custom_domain ? [var.custom_domain] : []
+  # 自訂網域別名（只有配置時才添加）
+  aliases = local.enable_custom_domain ? [var.custom_domain] : []
   
   tags = {
     Name = "${var.project_name}-distribution"

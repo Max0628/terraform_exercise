@@ -1,0 +1,33 @@
+# Terraform 變數配置範例
+#
+# 使用方式：
+# 1. 複製此檔案為 terraform.tfvars
+# 2. 修改下方變數值
+# 3. 執行 terraform apply
+
+# 專案名稱
+project_name = "cloudfront-s3-static-maxchauo"
+
+# AWS 區域
+aws_region = "ap-northeast-1"
+
+# AWS CLI Profile
+aws_profile = "dev"
+
+# S3 Bucket 名稱（必須全球唯一）
+bucket_name = "maxchauo-cloudfront-static-website"
+
+# 自訂網域（選填）
+# 
+# 留空：使用 CloudFront 預設網域
+# custom_domain = ""
+#
+# 填入客戶提供的網域後，Terraform 會：
+# 1. 在 ACM (us-east-1) 申請 SSL 憑證
+# 2. 輸出 DNS 驗證記錄
+# 3. 等待客戶在 Route53 添加驗證記錄
+# 4. 驗證通過後自動綁定到 CloudFront
+#
+# 範例：
+# custom_domain = "www.example.com"
+custom_domain = ""

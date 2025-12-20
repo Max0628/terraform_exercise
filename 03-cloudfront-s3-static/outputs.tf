@@ -15,12 +15,38 @@ output "cloudfront_distribution_id" {
 
 output "cloudfront_url" {
   description = "CloudFront 網址"
-  value       = "https://${aws_cloudfront_distribution.website.domain_name}"
+  value       = local.enable_custom_domain ? "https://${var.custom_domain}" : "https://${aws_cloudfront_distribution.website.domain_name}"
 }
 
 output "cloudfront_domain_name" {
   description = "CloudFront Domain Name"
   value       = aws_cloudfront_distribution.website.domain_name
+}
+
+output "website_url" {
+  description = "網站訪問地址（使用者應該訪問的網址）"
+  value       = local.enable_custom_domain ? "https://${var.custom_domain}" : "https://${aws_cloudfront_distribution.website.domain_name}"
+}
+
+output "dns_validation_records" {
+  description = "DNS 驗證記錄（請將這些記錄提供給客戶添加到 Route53）"
+  value = local.enable_custom_domain ? {
+    for dvo in aws_acm_certificate.cloudfront[0].domain_validation_options : dvo.domain_name => {
+      name  = dvo.resource_record_name
+      type  = dvo.resource_record_type
+      value = dvo.resource_record_value
+    }
+  } : {}
+}
+
+output "ssl_certificate_arn" {
+  description = "ACM 憑證 ARN（僅在配置自訂網域時有值）"
+  value       = local.enable_custom_domain ? aws_acm_certificate.cloudfront[0].arn : null
+}
+
+output "configuration_status" {
+  description = "配置狀態"
+  value = local.enable_custom_domain ? "已配置自訂網域：${var.custom_domain}" : "當前使用 CloudFront 預設網域，建議配置 custom_domain 變數"
 }
 
 output "deployment_commands" {
