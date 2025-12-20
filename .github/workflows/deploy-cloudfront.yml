@@ -6,7 +6,9 @@ on:
       - main
       - dev  # 支援 dev 分支自動部署
     paths:
-      - '03-cloudfront-s3-static/website/**'
+      - '03-cloudfront-s3-static/frontend/src/**'
+      - '03-cloudfront-s3-static/frontend/package.json'
+      - '03-cloudfront-s3-static/frontend/vite.config.js'
   workflow_dispatch:  # 允許手動觸發
 
 jobs:
@@ -24,17 +26,32 @@ jobs:
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-region: ${{ secrets.AWS_REGION }}
       
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+          cache-dependency-path: '03-cloudfront-s3-static/frontend/package-lock.json'
+      
+      - name: Install dependencies
+        working-directory: 03-cloudfront-s3-static/frontend
+        run: npm ci
+      
+      - name: Build Vue application
+        working-directory: 03-cloudfront-s3-static/frontend
+        run: npm run build
+      
       - name: Sync files to S3
         run: |
-          # 上傳靜態資源（長快取）
-          aws s3 sync 03-cloudfront-s3-static/website/ \
+          # 上傳所有靜態資源到 S3
+          aws s3 sync 03-cloudfront-s3-static/frontend/dist/ \
             s3://${{ secrets.S3_BUCKET_NAME }}/ \
             --delete \
             --cache-control "public, max-age=31536000" \
             --exclude "*.html"
           
           # 上傳 HTML（短快取）
-          aws s3 sync 03-cloudfront-s3-static/website/ \
+          aws s3 sync 03-cloudfront-s3-static/frontend/dist/ \
             s3://${{ secrets.S3_BUCKET_NAME }}/ \
             --exclude "*" \
             --include "*.html" \

@@ -100,18 +100,21 @@ resource "aws_cloudfront_distribution" "website" {
   # - 403 錯誤顯示自訂頁面
   # - SPA 應用可以用這個實現 client-side routing
   ########
+  
+  # SPA 路由處理：所有 404 和 403 都回傳 index.html
+  # 這樣 Vue Router 可以處理前端路由
   custom_error_response {
     error_code         = 404
-    response_code      = 404
-    response_page_path = "/error.html"
-    error_caching_min_ttl = 300  # 錯誤頁面快取 5 分鐘
+    response_code      = 200
+    response_page_path = "/index.html"
+    error_caching_min_ttl = 0  # 不快取，避免路由問題
   }
   
   custom_error_response {
     error_code         = 403
-    response_code      = 403
-    response_page_path = "/error.html"
-    error_caching_min_ttl = 300
+    response_code      = 200
+    response_page_path = "/index.html"
+    error_caching_min_ttl = 0
   }
   
   ########
