@@ -6,7 +6,7 @@ on:
       - main
       - dev  # 支援 dev 分支自動部署
     paths:
-      - 'exercises/03-cloudfront-s3-static/website/**'
+      - '03-cloudfront-s3-static/website/**'
   workflow_dispatch:  # 允許手動觸發
 
 jobs:
@@ -27,14 +27,14 @@ jobs:
       - name: Sync files to S3
         run: |
           # 上傳靜態資源（長快取）
-          aws s3 sync exercises/03-cloudfront-s3-static/website/ \
+          aws s3 sync 03-cloudfront-s3-static/website/ \
             s3://${{ secrets.S3_BUCKET_NAME }}/ \
             --delete \
             --cache-control "public, max-age=31536000" \
             --exclude "*.html"
           
           # 上傳 HTML（短快取）
-          aws s3 sync exercises/03-cloudfront-s3-static/website/ \
+          aws s3 sync 03-cloudfront-s3-static/website/ \
             s3://${{ secrets.S3_BUCKET_NAME }}/ \
             --exclude "*" \
             --include "*.html" \
