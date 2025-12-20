@@ -7,6 +7,7 @@ on:
       - dev  # 支援 dev 分支自動部署
     paths:
       - 'exercises/03-cloudfront-s3-static/website/**'
+  workflow_dispatch:  # 允許手動觸發
 
 jobs:
   deploy:
