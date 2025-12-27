@@ -1,8 +1,8 @@
 # DynamoDB Table for Todos
 resource "aws_dynamodb_table" "todos" {
   name         = "todos"
-  billing_mode = "PAY_PER_REQUEST" # On-demand pricing, no capacity planning needed
-  hash_key     = "id"
+  billing_mode = "PAY_PER_REQUEST" # 按需計費模式，
+  hash_key     = "id"              # 主鍵
 
   attribute {
     name = "id"
