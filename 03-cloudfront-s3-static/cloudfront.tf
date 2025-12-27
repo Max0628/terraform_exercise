@@ -110,6 +110,13 @@ resource "aws_cloudfront_distribution" "website" {
     # - 適合靜態內容
     
     cache_policy_id = "658327ea-f89d-4fab-a63d-7e88639e58f6"
+    
+    # CloudFront Function - SPA 路由處理
+    # 將非 API 和非靜態資源的請求重寫為 /index.html，讓 Vue Router 處理路由
+    function_association {
+      event_type   = "viewer-request"
+      function_arn = aws_cloudfront_function.spa_routing.arn
+    }
   }
   
   ########
