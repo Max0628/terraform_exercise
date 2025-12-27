@@ -49,6 +49,52 @@ output "configuration_status" {
   value = local.enable_custom_domain ? "已配置自訂網域：${var.custom_domain}" : "當前使用 CloudFront 預設網域，建議配置 custom_domain 變數"
 }
 
+# API Gateway outputs
+output "api_gateway_url" {
+  description = "API Gateway 端點 URL"
+  value       = aws_apigatewayv2_api.todos_api.api_endpoint
+}
+
+output "api_gateway_id" {
+  description = "API Gateway ID"
+  value       = aws_apigatewayv2_api.todos_api.id
+}
+
+output "lambda_function_name" {
+  description = "Lambda 函數名稱"
+  value       = aws_lambda_function.todos_api.function_name
+}
+
+output "dynamodb_table_name" {
+  description = "DynamoDB 表名稱"
+  value       = aws_dynamodb_table.todos.name
+}
+
+output "api_test_commands" {
+  description = "API 測試指令"
+  value = <<-EOF
+    
+    測試 API Gateway 端點（繞過 CloudFront）：
+    
+    1. 取得所有 Todos：
+       curl ${aws_apigatewayv2_api.todos_api.api_endpoint}/todos
+    
+    2. 建立新 Todo：
+       curl -X POST ${aws_apigatewayv2_api.todos_api.api_endpoint}/todos \
+         -H "Content-Type: application/json" \
+         -d '{"text":"測試項目"}'
+    
+    測試 CloudFront 分流（生產環境路徑）：
+    
+    1. 前端（應回傳 HTML）：
+       curl -I https://${aws_cloudfront_distribution.website.domain_name}/
+    
+    2. API（應回傳 JSON）：
+       curl https://${aws_cloudfront_distribution.website.domain_name}/api/todos
+    
+  EOF
+}
+
 output "deployment_commands" {
   description = "部署指令"
   value = <<-EOF

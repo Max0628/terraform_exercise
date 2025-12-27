@@ -36,7 +36,7 @@ resource "aws_cloudfront_distribution" "website" {
   price_class         = "PriceClass_200"  # 亞洲、歐洲、北美（不含南美、澳洲）
   
   ########
-  # Origin - S3 來源設定
+  # Origin 1 - S3 來源設定（前端靜態檔案）
   # 
   # 學習重點：
   # - 使用 S3 REST API endpoint（不是 website endpoint）
@@ -44,7 +44,7 @@ resource "aws_cloudfront_distribution" "website" {
   ########
   origin {
     domain_name              = aws_s3_bucket.website.bucket_regional_domain_name
-    origin_id                = "S3-${aws_s3_bucket.website.id}"
+    origin_id                = "S3-Frontend"
     origin_access_control_id = aws_cloudfront_origin_access_control.website.id
     
     
@@ -65,7 +65,27 @@ resource "aws_cloudfront_distribution" "website" {
   }
   
   ########
-  # Default Cache Behavior - 預設快取行為
+  # Origin 2 - API Gateway（後端 API）
+  # 
+  # 學習重點：
+  # - API Gateway 作為 custom origin
+  # - 移除 https:// 前綴（CloudFront 要求）
+  # - 使用 HTTPS 連接
+  ########
+  origin {
+    domain_name = replace(aws_apigatewayv2_api.todos_api.api_endpoint, "https://", "")
+    origin_id   = "API-Backend"
+    
+    custom_origin_config {
+      http_port              = 80
+      https_port             = 443
+      origin_protocol_policy = "https-only"
+      origin_ssl_protocols   = ["TLSv1.2"]
+    }
+  }
+  
+  ########
+  # Default Cache Behavior - 預設快取行為（靜態檔案）
   # 
   # 學習重點：
   # - 使用 AWS 管理的 Cache Policy
@@ -75,7 +95,7 @@ resource "aws_cloudfront_distribution" "website" {
   default_cache_behavior {
     allowed_methods        = ["GET", "HEAD", "OPTIONS"]
     cached_methods         = ["GET", "HEAD"]
-    target_origin_id       = "S3-${aws_s3_bucket.website.id}"
+    target_origin_id       = "S3-Frontend"
     viewer_protocol_policy = "redirect-to-https"  # 強制 HTTPS
     compress               = true                  # Gzip 壓縮
     
@@ -93,29 +113,44 @@ resource "aws_cloudfront_distribution" "website" {
   }
   
   ########
-  # Custom Error Response - 自訂錯誤頁面
+  # Ordered Cache Behavior - /api/* 路徑分流到 API Gateway
   # 
   # 學習重點：
-  # - 404 錯誤顯示自訂頁面
-  # - 403 錯誤顯示自訂頁面
-  # - SPA 應用可以用這個實現 client-side routing
+  # - 路徑優先級高於預設行為
+  # - 支援所有 HTTP 方法（CRUD）
+  # - 不快取 API 回應（CachingDisabled policy）
+  ########
+  ordered_cache_behavior {
+    path_pattern           = "/api/*"
+    target_origin_id       = "API-Backend"
+    viewer_protocol_policy = "redirect-to-https"
+    allowed_methods        = ["GET", "HEAD", "OPTIONS", "PUT", "POST", "PATCH", "DELETE"]
+    cached_methods         = ["GET", "HEAD"]
+    compress               = true
+    
+    # CachingDisabled (4135ea2d-6df8-44a3-9df3-4b5a84be39ad)：
+    # - 不快取回應
+    # - 適合動態 API
+    cache_policy_id = "4135ea2d-6df8-44a3-9df3-4b5a84be39ad"
+    
+    # AllViewerExceptHostHeader (b689b0a8-53d0-40ab-baf2-68738e2966ac)：
+    # - 轉發所有 headers, cookies, query strings 到 origin（除了 Host）
+    # - 使用 origin 的 domain name 作為 Host header
+    # - 修正 API Gateway 的 Forbidden 錯誤
+    origin_request_policy_id = "b689b0a8-53d0-40ab-baf2-68738e2966ac"
+  }
+  
+  ########
+  # Custom Error Response - 移除（會干擾 API 路徑）
+  # 
+  # 注意：
+  # - custom_error_response 是全局配置，會影響所有 origins
+  # - 對於 SPA 路由，Vue Router 的 history mode 會自動處理
+  # - 如果需要 404 頁面，可以在 Vue Router 中配置 catch-all route
   ########
   
-  # SPA 路由處理：所有 404 和 403 都回傳 index.html
-  # 這樣 Vue Router 可以處理前端路由
-  custom_error_response {
-    error_code         = 404
-    response_code      = 200
-    response_page_path = "/index.html"
-    error_caching_min_ttl = 0  # 不快取，避免路由問題
-  }
-  
-  custom_error_response {
-    error_code         = 403
-    response_code      = 200
-    response_page_path = "/index.html"
-    error_caching_min_ttl = 0
-  }
+  # 已移除 custom_error_response 以避免干擾 API 回應
+  # Vue Router 會自動處理前端路由的 404
   
   ########
   # Restrictions - 地理限制（可選）
