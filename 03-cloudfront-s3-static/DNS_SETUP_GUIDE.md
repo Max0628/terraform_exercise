@@ -1,10 +1,10 @@
-# 🌐 自訂域名配置指南
+# 自訂域名配置指南
 
 **交付給客戶（歐哥）的操作手冊**
 
 ---
 
-## 📋 文件說明
+## 文件說明
 
 此文件將指導您如何在自己的 AWS 帳號中，將公司的網域名稱（例如：www.yourcompany.com）指向我們為您部署的網站。
 
@@ -12,7 +12,7 @@
 
 ---
 
-## 🎯 配置前需要知道的資訊
+## 配置前需要知道的資訊
 
 ### 您的網站已部署在 CloudFront 上
 
@@ -27,7 +27,7 @@ CloudFront 預設網址：d2b8l7w7kqv3yo.cloudfront.net
 
 ---
 
-## 📝 操作步驟
+## 操作步驟
 
 ### 步驟 1：登入 AWS 管理控制台
 
@@ -43,7 +43,7 @@ CloudFront 預設網址：d2b8l7w7kqv3yo.cloudfront.net
 
 3. 點擊「登入」
 
-> 💡 **提示**：如果您不確定帳號資訊，請聯繫貴公司的 IT 部門
+> **提示**：如果您不確定帳號資訊，請聯繫貴公司的 IT 部門
 
 ---
 
@@ -63,7 +63,7 @@ CloudFront 預設網址：d2b8l7w7kqv3yo.cloudfront.net
 
 4. 您會看到 Route53 的主控制台頁面
 
-> 📍 **畫面說明**：頂部會顯示「Route53」，左側有選單，包含「Hosted zones」等選項
+> **畫面說明**：頂部會顯示「Route53」，左側有選單，包含「Hosted zones」等選項
 
 ---
 
@@ -86,7 +86,7 @@ CloudFront 預設網址：d2b8l7w7kqv3yo.cloudfront.net
 
 4. 進入後會看到現有的 DNS 記錄列表（通常已經有 NS 和 SOA 等記錄）
 
-> ⚠️ **注意**：如果您看不到任何 Hosted Zone，表示您的網域可能不在這個 AWS 帳號中，請聯繫 IT 部門確認
+> **注意**：如果您看不到任何 Hosted Zone，表示您的網域可能不在這個 AWS 帳號中，請聯繫 IT 部門確認
 
 ---
 
@@ -94,7 +94,7 @@ CloudFront 預設網址：d2b8l7w7kqv3yo.cloudfront.net
 
 現在要建立一筆新記錄，讓您的網域指向我們部署的網站。
 
-#### 🔵 方法 A：使用 A 記錄（Alias）- **強烈推薦**
+#### 方法 A：使用 A 記錄（Alias）- **強烈推薦**
 
 這是最簡單且免費的方式。
 
@@ -149,7 +149,7 @@ CloudFront 預設網址：d2b8l7w7kqv3yo.cloudfront.net
 
 ---
 
-#### 🔵 方法 B：使用 CNAME 記錄（替代方案）
+#### 方法 B：使用 CNAME 記錄（替代方案）
 
 **什麼時候用這個方法？**
 - 如果方法 A 遇到問題
@@ -165,7 +165,7 @@ CloudFront 預設網址：d2b8l7w7kqv3yo.cloudfront.net
    ```
    填寫：www 或 app
    ```
-   - ⚠️ **注意**：CNAME 不能用在根網域（不能留空白）
+   - **注意**：CNAME 不能用在根網域（不能留空白）
    - 只能用 `www`、`app`、`blog` 等子網域
 
    **b. Record type（記錄類型）**
@@ -211,13 +211,13 @@ CloudFront 預設網址：d2b8l7w7kqv3yo.cloudfront.net
 
 ---
 
-## ⚠️ HTTPS（安全連線）說明
+## HTTPS（安全連線）說明
 
 ### 目前狀態
 
 配置完成後，您會發現：
-- ✅ `http://www.yourcompany.com` 可以存取
-- ❌ `https://www.yourcompany.com` 會出現憑證警告
+- `http://www.yourcompany.com` 可以存取
+- `https://www.yourcompany.com` 會出現憑證警告
 
 ### 為什麼？
 
@@ -235,7 +235,7 @@ CloudFront 預設網址：d2b8l7w7kqv3yo.cloudfront.net
 
 ---
 
-## 📊 配置範例總結
+## 配置範例總結
 
 ### 範例 1：使用 www.mycompany.com
 
@@ -286,12 +286,12 @@ Route to:    CloudFront distribution
 ```
 
 **結果**：
-- `mycompany.com` ✅
-- `www.mycompany.com` ✅
+- `mycompany.com`
+- `www.mycompany.com`
 
 ---
 
-## ❓ 常見問題
+## 常見問題
 
 ### Q1：我找不到 Hosted Zone 怎麼辦？
 
@@ -357,7 +357,7 @@ Route to:    CloudFront distribution
 
 ---
 
-## 📞 需要協助？
+## 需要協助？
 
 如果在配置過程中遇到任何問題，歡迎隨時聯繫我們：
 
@@ -367,7 +367,7 @@ Route to:    CloudFront distribution
 
 ---
 
-## ✅ 配置檢查清單
+## 配置檢查清單
 
 完成配置後，請確認以下項目：
 
@@ -382,7 +382,7 @@ Route to:    CloudFront distribution
 
 ---
 
-## 📄 附件資訊
+## 附件資訊
 
 **您的網站資訊：**
 - CloudFront 網址：`d2b8l7w7kqv3yo.cloudfront.net`

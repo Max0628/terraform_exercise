@@ -1,39 +1,39 @@
 <template>
   <div class="home">
     <div class="hero">
-      <h1>🚀 CloudFront + S3 靜態網站</h1>
+      <h1>CloudFront + S3 靜態網站</h1>
       <p class="subtitle">使用 OAC (Origin Access Control) 的安全靜態網站</p>
       <p class="tech-stack">Vue 3 + Vite + Vue Router + CI/CD</p>
     </div>
 
     <div class="features">
       <div class="feature-card">
-        <div class="icon">☁️</div>
+        <div class="icon"></div>
         <h3>CloudFront CDN</h3>
         <p>全球加速內容傳輸，邊緣節點快取</p>
       </div>
       
       <div class="feature-card">
-        <div class="icon">🔒</div>
+        <div class="icon"></div>
         <h3>S3 Private Bucket</h3>
         <p>完全私有的儲存空間，禁止公開存取</p>
       </div>
       
       <div class="feature-card">
-        <div class="icon">🛡️</div>
+        <div class="icon"></div>
         <h3>OAC 安全機制</h3>
         <p>只能透過 CloudFront 存取 S3</p>
       </div>
       
       <div class="feature-card">
-        <div class="icon">⚡</div>
+        <div class="icon"></div>
         <h3>自動化部署</h3>
         <p>GitHub Actions CI/CD 自動編譯上傳</p>
       </div>
     </div>
 
     <div class="architecture">
-      <h2>🏗️ 架構流程</h2>
+      <h2>架構流程</h2>
       <div class="steps">
         <div class="step">
           <div class="step-number">1</div>

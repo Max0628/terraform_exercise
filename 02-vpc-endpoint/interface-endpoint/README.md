@@ -35,8 +35,8 @@
 │  │                                                 │  │
 │  └─────────────────────────────────────────────────┘  │
 │                                                         │
-│  ❌ 無 Internet Gateway                                │
-│  ❌ 無 NAT Gateway                                     │
+│  無 Internet Gateway                                │
+│  無 NAT Gateway                                     │
 └─────────────────────────────────────────────────────────┘
 ```
 
@@ -92,7 +92,7 @@ Private DNS 回應：10.0.16.10（Endpoint ENI 的 IP）
 | Interface Endpoint | $7.2/月 + $0.01/GB |
 | **節省** | **$25.2/月 + 每 GB 省 $0.035** |
 
-💡 **成本優勢：**
+**成本優勢：**
 - 固定成本省 78%
 - 流量成本省 78%
 - 如果有多個 AWS 服務，每個 Interface Endpoint 都要收費
@@ -162,7 +162,7 @@ curl -I https://www.google.com
 
 ## 驗證重點
 
-### ✅ 成功指標
+### 成功指標
 
 1. **DNS 解析到私有 IP**
    ```bash
@@ -181,7 +181,7 @@ curl -I https://www.google.com
    # 應該 timeout
    ```
 
-### ❌ 失敗排查
+### 失敗排查
 
 1. **SQS 無法存取**
    - 檢查 Security Group 是否允許 HTTPS (443)
@@ -212,14 +212,14 @@ Interface Endpoint 需要設定 Security Group：
 ### 3. 成本考量
 
 **何時使用 Interface Endpoint？**
-- ✅ 需要存取多個 AWS 服務
-- ✅ 資料傳輸量很大
-- ✅ 需要額外的安全性
+- 需要存取多個 AWS 服務
+- 資料傳輸量很大
+- 需要額外的安全性
 
 **何時使用 NAT Gateway？**
-- ✅ 需要存取外網
-- ✅ 只有少量 AWS 服務流量
-- ✅ 需要固定的公網 IP
+- 需要存取外網
+- 只有少量 AWS 服務流量
+- 需要固定的公網 IP
 
 ## 延伸學習
 

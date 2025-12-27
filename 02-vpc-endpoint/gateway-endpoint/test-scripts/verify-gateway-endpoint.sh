@@ -89,11 +89,11 @@ echo "=========================================="
 echo "測試 3：S3 上傳/下載測試"
 echo "=========================================="
 
-echo "📤 上傳測試檔案..."
+echo "上傳測試檔案..."
 aws ssm send-command \
     --instance-ids "$INSTANCE_ID" \
     --document-name "AWS-RunShellScript" \
-    --parameters 'commands=["echo \"Test from Gateway Endpoint at $(date)\" > /tmp/test.txt && aws s3 cp /tmp/test.txt s3://'"$S3_BUCKET"'/test.txt && echo \"✅ 上傳成功\" || echo \"❌ 上傳失敗\""]' \
+    --parameters 'commands=["echo \"Test from Gateway Endpoint at $(date)\" > /tmp/test.txt && aws s3 cp /tmp/test.txt s3://'"$S3_BUCKET"'/test.txt && echo \"上傳成功\" || echo \"上傳失敗\""]' \
     --profile "$AWS_PROFILE" \
     --output text \
     --query 'Command.CommandId' > /tmp/command_id3.txt

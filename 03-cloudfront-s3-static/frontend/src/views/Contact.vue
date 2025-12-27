@@ -1,14 +1,14 @@
 <template>
   <div class="contact">
     <div class="header">
-      <h1>📞 聯絡資訊</h1>
+      <h1>聯絡資訊</h1>
       <p>有問題或建議？歡迎聯絡我們！</p>
     </div>
 
     <div class="content">
       <div class="contact-cards">
         <div class="card">
-          <div class="card-icon">💼</div>
+          <div class="card-icon"></div>
           <h3>專案資訊</h3>
           <div class="info-item">
             <strong>專案名稱：</strong>
@@ -25,36 +25,36 @@
         </div>
 
         <div class="card">
-          <div class="card-icon">🔗</div>
+          <div class="card-icon"></div>
           <h3>相關連結</h3>
           <div class="link-item">
             <a href="https://github.com" target="_blank" rel="noopener">
-              <span class="link-icon">🐙</span>
+              <span class="link-icon"></span>
               GitHub Repository
             </a>
           </div>
           <div class="link-item">
             <a href="https://aws.amazon.com/cloudfront/" target="_blank" rel="noopener">
-              <span class="link-icon">☁️</span>
+              <span class="link-icon"></span>
               AWS CloudFront 文件
             </a>
           </div>
           <div class="link-item">
             <a href="https://vuejs.org" target="_blank" rel="noopener">
-              <span class="link-icon">💚</span>
+              <span class="link-icon"></span>
               Vue.js 官方網站
             </a>
           </div>
           <div class="link-item">
             <a href="https://vitejs.dev" target="_blank" rel="noopener">
-              <span class="link-icon">⚡</span>
+              <span class="link-icon"></span>
               Vite 官方網站
             </a>
           </div>
         </div>
 
         <div class="card">
-          <div class="card-icon">📧</div>
+          <div class="card-icon"></div>
           <h3>技術支援</h3>
           <div class="info-item">
             <strong>Email：</strong>
@@ -72,7 +72,7 @@
       </div>
 
       <div class="deployment-info">
-        <h2>🚀 部署資訊</h2>
+        <h2>部署資訊</h2>
         <div class="deployment-steps">
           <div class="step">
             <div class="step-number">1</div>
@@ -110,7 +110,7 @@
       </div>
 
       <div class="faq">
-        <h2>❓ 常見問題</h2>
+        <h2>常見問題</h2>
         <details>
           <summary>為什麼選擇 CloudFront + S3？</summary>
           <p>CloudFront 提供全球 CDN 加速，大幅降低資料傳輸成本（節省 87%），並且提供 HTTPS、DDoS 防護等安全功能。</p>

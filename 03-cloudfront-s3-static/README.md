@@ -67,14 +67,14 @@
 
 | 方案 | 安全性 | AWS 建議 | 設定複雜度 | 限制 |
 |------|--------|----------|-----------|------|
-| **Public Bucket** | ❌ 低 | ❌ 不建議 | 簡單 | S3 直接公開，任何人都可存取 |
-| **OAI (Legacy)** | ⚠️ 中 | ⚠️ Legacy | 中等 | 舊版機制，功能有限 |
-| **OAC (推薦)** | ✅ 高 | ✅ 推薦 | 中等 | 新版機制，支援更多功能 |
+| **Public Bucket** | 低 | 不建議 | 簡單 | S3 直接公開，任何人都可存取 |
+| **OAI (Legacy)** | 中 | Legacy | 中等 | 舊版機制，功能有限 |
+| **OAC (推薦)** | 高 | 推薦 | 中等 | 新版機制，支援更多功能 |
 
 ### Public Bucket 的問題
 
 ```
-❌ 任何人都可以直接存取 S3：
+任何人都可以直接存取 S3：
    https://bucket-name.s3.amazonaws.com/index.html
 
 問題：
@@ -86,7 +86,7 @@
 ### OAI (Origin Access Identity) - Legacy
 
 ```
-⚠️ 舊版機制：
+舊版機制：
 - 2022 年前的標準做法
 - 功能有限
 - AWS 建議遷移到 OAC
@@ -95,7 +95,7 @@
 ### OAC (Origin Access Control) - 推薦
 
 ```
-✅ 新版機制（2022 推出）：
+新版機制（2022 推出）：
 - 支援所有 S3 功能（包括 SSE-KMS 加密）
 - 支援動態請求（PUT、DELETE）
 - 更好的安全性（使用 AWS Signature v4）
@@ -107,7 +107,7 @@
 ### ACL (Access Control List) - 不建議
 
 ```
-❌ AWS 建議停用 ACL：
+AWS 建議停用 ACL：
 - 功能有限（只有預設的幾種權限）
 - 無法設定複雜條件
 - 難以管理（每個物件都要設定）
@@ -117,7 +117,7 @@
 ### Bucket Policy - 推薦
 
 ```
-✅ Bucket Policy 優勢：
+Bucket Policy 優勢：
 - 功能強大（支援各種條件）
 - 集中管理（一個 Policy 控制整個 Bucket）
 - 易於版本控制（JSON 格式）
@@ -285,7 +285,7 @@ curl -I $(terraform output -raw cloudfront_url) | grep -i "HTTP/2"
 
 ## 驗證重點
 
-### ✅ 成功指標
+### 成功指標
 
 1. **CloudFront 可以存取**
    - HTTP 200 OK
@@ -303,7 +303,7 @@ curl -I $(terraform output -raw cloudfront_url) | grep -i "HTTP/2"
    - 使用 HTTP/2
    - SSL 憑證有效
 
-### ❌ 失敗排查
+### 失敗排查
 
 1. **CloudFront 回應 403**
    - 檢查 Bucket Policy 是否正確
@@ -458,19 +458,19 @@ aws cloudfront create-invalidation \
 ### Q5: GitHub Actions 部署失敗怎麼辦？
 
 **A:** 檢查清單：
-1. ✅ GitHub Secrets 設定正確
-2. ✅ IAM 權限足夠（S3 寫入 + CloudFront Invalidation）
-3. ✅ Bucket 名稱正確
-4. ✅ Distribution ID 正確
-5. ✅ 網站檔案路徑正確（website/）
+1. GitHub Secrets 設定正確
+2. IAM 權限足夠（S3 寫入 + CloudFront Invalidation）
+3. Bucket 名稱正確
+4. Distribution ID 正確
+5. 網站檔案路徑正確（website/）
 
 ## 下一步
 
 完成本練習後，你已經掌握：
-- ✅ CloudFront + S3 靜態網站架構
-- ✅ OAC 安全設定
-- ✅ Bucket Policy vs ACL 差異
-- ✅ CI/CD 自動部署
+- CloudFront + S3 靜態網站架構
+- OAC 安全設定
+- Bucket Policy vs ACL 差異
+- CI/CD 自動部署
 
 可以嘗試：
 1. 加上自訂網域

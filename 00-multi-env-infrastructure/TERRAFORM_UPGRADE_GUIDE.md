@@ -114,7 +114,7 @@ terragrunt run-all plan
 terragrunt run-all apply
 ```
 
-## 🔑 關鍵技術說明
+## 關鍵技術說明
 
 ### 1. Terragrunt 的 Remote State 配置
 在 `environments/terragrunt.hcl`:
@@ -179,7 +179,7 @@ Root (terragrunt.hcl)
       └─→ compute/terragrunt.hcl
 ```
 
-## 📊 State 檔案組織
+## State 檔案組織
 
 ### S3 Bucket 結構
 ```
@@ -204,7 +204,7 @@ LockID 範例:
 - terraform-state-maxchauo-exercise/prod/compute/terraform.tfstate-md5
 ```
 
-## 🎓 分享給同學的重點
+## 分享給同學的重點
 
 ### 1. S3 Remote Backend 的價值
 展示前後對比：
@@ -265,7 +265,7 @@ cd environments/prod
 cat terragrunt.hcl  # instance_type = "t3.small"
 ```
 
-## ⚠️ 注意事項
+## 注意事項
 
 ### 部署前必須修改
 在 `environments/dev/terragrunt.hcl` 和 `environments/prod/terragrunt.hcl`:
@@ -290,7 +290,7 @@ cd compute && terragrunt destroy
 cd ../network && terragrunt destroy
 ```
 
-## 🚀 進階玩法
+## 進階玩法
 
 ### 1. 查看所有環境的 State
 ```bash
@@ -330,7 +330,7 @@ aws s3api get-object \
   --profile dev
 ```
 
-## 📝 作業檢查清單
+## 作業檢查清單
 
 - [ ] Backend Setup 完成
   - [ ] S3 bucket 建立成功
@@ -355,7 +355,7 @@ aws s3api get-object \
   - [ ] 模組依賴正確運作
   - [ ] run-all 指令正常
 
-## 🎉 完成！
+## 完成！
 
 你現在擁有：
 1. 完整的 S3 Remote Backend 設定
@@ -363,4 +363,4 @@ aws s3api get-object \
 3. Dev/Prod 環境分離
 4. 可展示給同學的範例
 
-Good luck with your presentation! 🚀
+Good luck with your presentation!

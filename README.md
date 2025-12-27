@@ -2,7 +2,7 @@
 
 本專案包含四個獨立的 Terraform AWS 實作作業，每個作業專注於不同的核心技術與架構模式。
 
-## 📚 作業列表
+## 作業列表
 
 ### [00 - Multi-Environment Infrastructure](./00-multi-env-infrastructure/)
 **核心技術**：
@@ -56,11 +56,11 @@
 
 ---
 
-## 🚀 快速開始
+## 快速開始
 
 每個作業都是獨立的 Terraform 專案，請進入對應資料夾查看詳細的 README。
 
-## 📁 專案架構
+## 專案架構
 
 ```
 terraform_exercise/
@@ -70,7 +70,7 @@ terraform_exercise/
 └── 03-cloudfront-s3-static/      # CloudFront CDN
 ```
 
-## 🛠️ 技術棧
+## 技術棧
 
 - **IaC 工具**：Terraform, Terragrunt
 - **雲端平台**：AWS (ap-northeast-1 東京)
@@ -79,4 +79,4 @@ terraform_exercise/
 
 ---
 
-> 💡 **學習提示**：建議按照 00 → 01 → 02 → 03 的順序學習，循序漸進掌握 Terraform 與 AWS 架構設計。
+> **學習提示**：建議按照 00 → 01 → 02 → 03 的順序學習，循序漸進掌握 Terraform 與 AWS 架構設計。

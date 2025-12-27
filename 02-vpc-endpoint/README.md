@@ -1,18 +1,18 @@
 # VPC Endpoint 使用場景
 
-## 🎯 作業目標
+## 作業目標
 
 理解並實作兩種 VPC Endpoint，學習在不走公網的情況下，讓 VPC 內的資源安全存取 AWS 服務。
 
 ---
 
-## 📚 問答題
+## 問答題
 
 ### Q1: 為何需要用 VPC Endpoint？
 
 #### **情境對比：沒有 VPC Endpoint vs 有 VPC Endpoint**
 
-**❌ 傳統方式（沒有 VPC Endpoint）**：
+**傳統方式（沒有 VPC Endpoint）**：
 ```
 Private EC2 (10.0.1.10)
     ↓
@@ -39,7 +39,7 @@ S3 Bucket
    - 需要經過 NAT Gateway 轉換
    - 走公網延遲較高
 
-**✅ 使用 VPC Endpoint 後**：
+**使用 VPC Endpoint 後**：
 ```
 Private EC2 (10.0.1.10)
     ↓
@@ -54,7 +54,7 @@ S3 Bucket
 
 **優點**：
 1. **大幅節省成本**：
-   - Gateway Endpoint（S3/DynamoDB）：**完全免費** 🎉
+   - Gateway Endpoint（S3/DynamoDB）：**完全免費**
    - Interface Endpoint：$0.01/小時 ≈ $7/月（比 NAT Gateway 便宜 78%）
 
 2. **安全性提升**：
@@ -75,7 +75,7 @@ S3 Bucket
 | 資料傳輸費 | $45/月 (1TB × $0.045) | **免費** |
 | **總計** | **$77/月** | **$0/月** |
 
-**💰 結論：使用 Gateway Endpoint 每月省 $924（一年省 $11,088）**
+**結論：使用 Gateway Endpoint 每月省 $924（一年省 $11,088）**
 
 ---
 
@@ -94,7 +94,7 @@ S3 Bucket
 
 #### **詳細說明**
 
-**🔷 Gateway Endpoint（以 S3 為例）**
+**Gateway Endpoint（以 S3 為例）**
 
 1. **運作原理**：
    ```
@@ -121,7 +121,7 @@ S3 Bucket
    - 只支援 S3 和 DynamoDB
    - 無法用 Security Group 控制（只能用 Bucket Policy）
 
-**🔶 Interface Endpoint（以 SQS 為例）**
+**Interface Endpoint（以 SQS 為例）**
 
 1. **運作原理**：
    ```
@@ -198,12 +198,12 @@ S3 Bucket
 #### **通用限制**
 
 ```
-✅ 必須做的事：
+必須做的事：
 - VPC 啟用 DNS support 和 DNS hostnames
 - 正確設定 Route Table（Gateway）或 Security Group（Interface）
 - 設定 Bucket/Resource Policy 限制只能從 VPC Endpoint 存取
 
-❌ 不能做的事：
+不能做的事：
 - 跨 Region 存取（Endpoint 和服務必須同 Region）
 - 跨 VPC 存取（除非設定 VPC Peering）
 - 從 on-premises 透過 VPN/Direct Connect 存取（需要額外設定）
@@ -211,7 +211,7 @@ S3 Bucket
 
 ---
 
-## 🏗️ 實作架構
+## 實作架構
 
 ### 架構一：S3 Gateway Endpoint
 
@@ -245,9 +245,9 @@ S3 Bucket
 ```
 
 **特點**：
-- ✅ 不需要 NAT Gateway
-- ✅ 完全免費
-- ✅ 透過 Route Table 路由
+- 不需要 NAT Gateway
+- 完全免費
+- 透過 Route Table 路由
 
 ### 架構二：SQS Interface Endpoint
 
@@ -279,13 +279,13 @@ S3 Bucket
 ```
 
 **特點**：
-- ✅ 有實體 ENI 網卡（可看到 IP）
-- ✅ 可用 Security Group 控制
-- ✅ Private DNS 無縫整合
+- 有實體 ENI 網卡（可看到 IP）
+- 可用 Security Group 控制
+- Private DNS 無縫整合
 
 ---
 
-## 🔍 驗證重點（最關鍵！）
+## 驗證重點（最關鍵！）
 
 ### **如何證明流量沒有走外網？**
 
@@ -331,31 +331,31 @@ traceroute s3.amazonaws.com
 
 ---
 
-## 📂 子作業結構
+## 子作業結構
 
 - [gateway-endpoint/](./gateway-endpoint/) - S3 Gateway Endpoint 實作
 - [interface-endpoint/](./interface-endpoint/) - SQS Interface Endpoint 實作
 
 每個子作業都有：
-- ✅ 完整的 Terraform 程式碼
-- ✅ 驗證腳本（證明不走外網）
-- ✅ 詳細的中文註解
+- 完整的 Terraform 程式碼
+- 驗證腳本（證明不走外網）
+- 詳細的中文註解
 
 ---
 
-## 💡 學習目標總結
+## 學習目標總結
 
 完成此作業後，你應該能夠：
 
-1. ✅ **理解成本差異**：知道何時該用 VPC Endpoint 節省費用
-2. ✅ **選擇正確類型**：Gateway vs Interface 的使用場景
-3. ✅ **正確配置**：VPC DNS、Route Table、Security Group、Bucket Policy
-4. ✅ **驗證流量路徑**：使用多種方法證明流量走私有網路
-5. ✅ **安全最佳實踐**：Bucket Policy 限制只能從 VPC Endpoint 存取
+1. **理解成本差異**：知道何時該用 VPC Endpoint 節省費用
+2. **選擇正確類型**：Gateway vs Interface 的使用場景
+3. **正確配置**：VPC DNS、Route Table、Security Group、Bucket Policy
+4. **驗證流量路徑**：使用多種方法證明流量走私有網路
+5. **安全最佳實踐**：Bucket Policy 限制只能從 VPC Endpoint 存取
 
 ---
 
-## 📚 參考資源
+## 參考資源
 
 - [AWS VPC Endpoints 官方文件](https://docs.aws.amazon.com/vpc/latest/privatelink/vpc-endpoints.html)
 - [Gateway Endpoints 說明](https://docs.aws.amazon.com/vpc/latest/privatelink/gateway-endpoints.html)

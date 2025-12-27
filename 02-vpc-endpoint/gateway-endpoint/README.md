@@ -1,12 +1,12 @@
 # S3 Gateway Endpoint 實作
 
-## 🎯 目標
+## 目標
 
 建立一個完全私有的環境，讓 Private Subnet 中的 EC2 可以透過 Gateway Endpoint 存取 S3，**完全不需要 NAT Gateway**，並驗證流量確實沒有走公網。
 
 ---
 
-## 🏗️ 架構說明
+## 架構說明
 
 ```
 VPC (10.0.0.0/16)
@@ -25,14 +25,14 @@ VPC (10.0.0.0/16)
 ```
 
 **關鍵重點**：
-- ❌ **沒有** Internet Gateway
-- ❌ **沒有** NAT Gateway
-- ❌ **沒有** Public Subnet
-- ✅ **只有** Private Subnet + Gateway Endpoint
+- **沒有** Internet Gateway
+- **沒有** NAT Gateway
+- **沒有** Public Subnet
+- **只有** Private Subnet + Gateway Endpoint
 
 ---
 
-## 🚀 部署步驟
+## 部署步驟
 
 ### 1. 初始化
 ```bash
@@ -88,7 +88,7 @@ aws s3 cp test.txt s3://$(terraform output -raw s3_bucket_name)/
 # 3. 下載驗證
 aws s3 cp s3://$(terraform output -raw s3_bucket_name)/test.txt - 
 
-# ✅ 如果成功 → Gateway Endpoint 正常運作
+# 如果成功 → Gateway Endpoint 正常運作
 ```
 
 ### **驗證三：測試外網存取（應該失敗）**
@@ -97,7 +97,7 @@ aws s3 cp s3://$(terraform output -raw s3_bucket_name)/test.txt -
 # 測試無法存取外網（證明沒有 NAT Gateway）
 curl -I https://www.google.com --max-time 10
 
-# ❌ 應該會 timeout → 證明確實沒有外網
+# 應該會 timeout → 證明確實沒有外網
 ```
 
 ### **驗證四：檢查路由（關鍵證明！）**
@@ -132,7 +132,7 @@ nslookup s3.amazonaws.com
 
 ---
 
-## 🔧 驗證腳本
+## 驗證腳本
 
 提供自動化驗證腳本：
 
@@ -142,9 +142,9 @@ nslookup s3.amazonaws.com
 ```
 
 腳本會自動測試：
-1. ✅ S3 存取（應該成功）
-2. ❌ 外網存取（應該失敗）
-3. 📊 輸出驗證報告
+1. S3 存取（應該成功）
+2. 外網存取（應該失敗）
+3. 輸出驗證報告
 
 ---
 
@@ -162,7 +162,7 @@ terraform destroy
 
 ---
 
-## 💡 學習重點
+## 學習重點
 
 ### 1. **Gateway Endpoint 完全免費**
    - 不像 NAT Gateway 需要 $32/月
@@ -186,7 +186,7 @@ terraform destroy
 
 ---
 
-## 🚨 常見問題
+## 常見問題
 
 ### Q: 為什麼 S3 的 DNS 還是解析到公網 IP？
 
@@ -218,7 +218,7 @@ A: 可以！在 Bucket Policy 中使用條件：
 
 ---
 
-## 📚 延伸思考
+## 延伸思考
 
 1. **如果 EC2 需要同時存取 S3 和外網怎麼辦？**
    - 可以同時有 Gateway Endpoint 和 NAT Gateway

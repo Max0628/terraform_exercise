@@ -177,15 +177,15 @@ terragrunt destroy
 ## 優勢總結
 
 ### vs 純 Terraform
-- ❌ Terraform: 每個環境都要複製 backend 配置
+- Terraform: 每個環境都要複製 backend 配置
 - Terragrunt: 在 root 定義一次，所有環境繼承
 
 ### vs Local State
-- ❌ Local State: 無法多人協作，容易衝突
+- Local State: 無法多人協作，容易衝突
 - Remote State: S3 + DynamoDB 提供 locking 機制
 
 ### 多環境管理
-- ❌ 傳統做法: 用 workspace 或複製資料夾
+- 傳統做法: 用 workspace 或複製資料夾
 - Terragrunt: 清晰的目錄結構，變數集中管理
 
 ## 疑難排解
@@ -215,4 +215,4 @@ aws dynamodb describe-table --table-name terraform-state-lock --profile dev --re
 1. 完成 S3 Backend setup
 2. 部署 Dev 環境測試
 3. 部署 Prod 環境
-4. 📝 分享給同學：展示 Terragrunt 如何簡化多環境管理
+4. 分享給同學：展示 Terragrunt 如何簡化多環境管理

@@ -1,12 +1,12 @@
 # S3 檔案上傳通知推播（Discord Webhook）
 
-## 🎯 作業目標
+## 作業目標
 
 實作一個事件驅動的通知系統：當圖片上傳到 S3 bucket 時，自動透過 Lambda 函數發送通知到 Discord 頻道，通知會計人員有新單據需要處理。
 
 ---
 
-## 📚 核心學習重點
+## 核心學習重點
 
 ### 1. **Event-Driven Architecture（事件驅動架構）**
 - **什麼是事件驅動**？
@@ -62,7 +62,7 @@
 
 ---
 
-## 🏗️ 架構圖
+## 架構圖
 
 ```
 ┌─────────────┐
@@ -92,7 +92,7 @@
 
 ---
 
-## 📋 前置需求
+## 前置需求
 
 1. **Discord Webhook URL**（作業已提供）
    ```
@@ -107,7 +107,7 @@
 
 ---
 
-## 🚀 部署步驟
+## 部署步驟
 
 ### 1. 設定變數
 ```bash
@@ -145,7 +145,7 @@ terraform destroy
 
 ---
 
-## 💡 延伸思考
+## 延伸思考
 
 1. **安全性改進**：
    - 如何避免將 Discord Webhook URL 寫入程式碼？（提示：AWS Secrets Manager）
@@ -160,7 +160,7 @@ terraform destroy
 
 ---
 
-## 📚 相關資源
+## 相關資源
 
 - [AWS Lambda 開發指南](https://docs.aws.amazon.com/lambda/latest/dg/welcome.html)
 - [S3 Event Notifications](https://docs.aws.amazon.com/AmazonS3/latest/userguide/NotificationHowTo.html)

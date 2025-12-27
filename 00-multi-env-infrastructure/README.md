@@ -1,8 +1,8 @@
 # Terraform AWS 基礎架構實作專案
 
-## 📁 專案結構
+## 專案結構
 
-### 🏗️ 基礎架構
+### 基礎架構
 - **Multi-environment setup** with Terragrunt
   - `environments/dev/` - 開發環境
   - `environments/prod/` - 生產環境
@@ -12,7 +12,7 @@
 - **Remote State Backend**
   - `backend-setup/` - S3 + DynamoDB 狀態管理
 
-### 🎓 練習作業（Learning & Practice）
+### 練習作業（Learning & Practice）
 - `exercises/01-s3-lambda-discord/` - Event-driven S3 上傳通知
 - `exercises/02-vpc-endpoint/` - VPC Endpoint（Gateway & Interface）
 - `exercises/03-cloudfront-s3-static/` - CloudFront CDN + 靜態網站

@@ -1,13 +1,13 @@
 <template>
   <div class="about">
     <div class="header">
-      <h1>📚 關於此專案</h1>
+      <h1>關於此專案</h1>
       <p>使用 Terraform 部署的 Vue 3 靜態網站</p>
     </div>
 
     <div class="content">
       <section class="info-section">
-        <h2>🎯 專案目標</h2>
+        <h2>專案目標</h2>
         <p>本專案展示如何使用 Terraform 在 AWS 上建立一個安全、高效能的靜態網站部署架構。</p>
         <ul>
           <li>S3 儲存靜態網站資源（完全私有）</li>
@@ -18,10 +18,10 @@
       </section>
 
       <section class="info-section">
-        <h2>🔒 安全性最佳實踐</h2>
+        <h2>安全性最佳實踐</h2>
         <div class="comparison">
           <div class="method">
-            <h3>❌ 舊方法：OAI</h3>
+            <h3>舊方法：OAI</h3>
             <p>Origin Access Identity</p>
             <ul>
               <li>較舊的權限控管方式</li>
@@ -30,7 +30,7 @@
             </ul>
           </div>
           <div class="method highlight">
-            <h3>✅ 新方法：OAC</h3>
+            <h3>新方法：OAC</h3>
             <p>Origin Access Control</p>
             <ul>
               <li>支援所有 S3 Bucket 類型</li>
@@ -43,7 +43,7 @@
       </section>
 
       <section class="info-section">
-        <h2>💰 成本分析</h2>
+        <h2>成本分析</h2>
         <table class="cost-table">
           <thead>
             <tr>
@@ -65,42 +65,42 @@
             </tr>
           </tbody>
         </table>
-        <p class="saving">💡 使用 CloudFront 可節省 <strong>87% 成本</strong>！</p>
+        <p class="saving">使用 CloudFront 可節省 <strong>87% 成本</strong>！</p>
       </section>
 
       <section class="info-section">
-        <h2>🛠️ 技術棧</h2>
+        <h2>技術棧</h2>
         <div class="tech-grid">
           <div class="tech-item">
-            <span class="tech-icon">⚡</span>
+            <span class="tech-icon"></span>
             <span>Vue 3</span>
           </div>
           <div class="tech-item">
-            <span class="tech-icon">🔧</span>
+            <span class="tech-icon"></span>
             <span>Vite</span>
           </div>
           <div class="tech-item">
-            <span class="tech-icon">🧭</span>
+            <span class="tech-icon"></span>
             <span>Vue Router</span>
           </div>
           <div class="tech-item">
-            <span class="tech-icon">🏗️</span>
+            <span class="tech-icon"></span>
             <span>Terraform</span>
           </div>
           <div class="tech-item">
-            <span class="tech-icon">☁️</span>
+            <span class="tech-icon"></span>
             <span>AWS S3</span>
           </div>
           <div class="tech-item">
-            <span class="tech-icon">🌐</span>
+            <span class="tech-icon"></span>
             <span>CloudFront</span>
           </div>
           <div class="tech-item">
-            <span class="tech-icon">🤖</span>
+            <span class="tech-icon"></span>
             <span>GitHub Actions</span>
           </div>
           <div class="tech-item">
-            <span class="tech-icon">🔐</span>
+            <span class="tech-icon"></span>
             <span>OAC</span>
           </div>
         </div>
@@ -164,7 +164,7 @@
 }
 
 .info-section li::before {
-  content: "✓";
+  content: "";
   position: absolute;
   left: 0;
   color: #667eea;

@@ -10,12 +10,12 @@
 set -e
 
 echo "=========================================="
-echo "🔍 Interface Endpoint 驗證測試"
+echo "Interface Endpoint 驗證測試"
 echo "=========================================="
 echo ""
 
 # 取得 Terraform outputs
-echo "📋 取得部署資訊..."
+echo "取得部署資訊..."
 INSTANCE_ID=$(cd .. && terraform output -raw ec2_instance_id 2>/dev/null)
 QUEUE_URL=$(cd .. && terraform output -raw sqs_queue_url 2>/dev/null)
 AWS_REGION=${AWS_REGION:-ap-northeast-1}
@@ -57,7 +57,7 @@ aws ssm get-command-invocation \
     --output text
 
 echo ""
-echo "💡 檢查重點：IP 應該是 10.0.x.x（私有 IP），不是 52.x.x.x（公網 IP）"
+echo "檢查重點：IP 應該是 10.0.x.x（私有 IP），不是 52.x.x.x（公網 IP）"
 echo ""
 
 # 測試 2：發送 SQS 訊息
