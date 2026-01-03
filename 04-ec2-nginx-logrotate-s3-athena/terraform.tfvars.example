@@ -1,0 +1,22 @@
+# 複製此檔案為 terraform.tfvars 並填入實際值
+
+aws_region = "ap-northeast-1"
+
+project_name = "nginx-log-athena"
+
+environment = "dev"
+
+# EC2 實例類型
+instance_type = "t3.micro"
+
+# SSH Key Pair 名稱（需先在 AWS 建立）
+key_name = "your-key-name"
+
+# 允許 SSH 連線的 IP（建議限制為你的 IP）
+allowed_ssh_cidr = ["0.0.0.0/0"]
+
+# 本地日誌保留時數
+log_retention_hours = 24
+
+# S3 儲存桶名稱（必須全球唯一）
+s3_log_bucket_name = "your-unique-nginx-logs-bucket-name"
